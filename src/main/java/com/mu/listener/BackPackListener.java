@@ -11,6 +11,8 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.inventory.CraftItemEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
+import org.bukkit.event.inventory.InventoryInteractEvent;
+import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
@@ -21,13 +23,12 @@ import java.util.UUID;
 public class BackPackListener implements Listener {
 
     @EventHandler
-    public void onBlockPlaceEvent(BlockPlaceEvent e) {
+    public void onBlockPlaceEvent(PlayerInteractEvent e) {
         Player p = e.getPlayer();
-        Block b = e.getBlock();
-        ItemStack i = e.getItemInHand();
+        ItemStack i = e.getItem();
         String name = i.getItemMeta().getDisplayName();
 
-        if (i.isSimilar(Items.BACK_PACK)) {
+        if (name.equalsIgnoreCase(ChatColor.GOLD + "Backpack")) {
             e.setCancelled(true);
             String uuid = i.getItemMeta().getLore().get(0);
             Stats.BACKPACKS.put(p.getName(), uuid);
