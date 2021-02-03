@@ -1,14 +1,16 @@
 package com.mu.listener;
 
 import com.mu.item.Items;
+import com.mu.utils.BackPackMan;
+import com.mu.utils.Stats;
 import org.bukkit.ChatColor;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
-import org.bukkit.event.Event;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.inventory.CraftItemEvent;
+import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
@@ -28,6 +30,19 @@ public class BackPackListener implements Listener {
         if (i.isSimilar(Items.BACK_PACK)) {
             e.setCancelled(true);
             String uuid = i.getItemMeta().getLore().get(0);
+            Stats.BACKPACKS.put(p.getName(), uuid);
+            p.openInventory(BackPackMan.getBackPack(uuid));
+        }
+    }
+
+    @EventHandler
+    public void onInventoryCloseEvent(InventoryCloseEvent e) {
+        String title = e.getView().getTitle();
+        Player p = (Player) e.getPlayer();
+
+        if (title.equalsIgnoreCase(ChatColor.GOLD + "Backpack")) {
+            BackPackMan.saveBackPack(Stats.BACKPACKS.get(p.getName()), e.getInventory());
+            Stats.BACKPACKS.put(p.getName(), null);
         }
     }
 
@@ -40,10 +55,13 @@ public class BackPackListener implements Listener {
             ItemMeta m = i.getItemMeta();
 
             List<String> lore = new ArrayList<>();
-            lore.add(ChatColor.GRAY + UUID.randomUUID().toString());
+            String uuid = UUID.randomUUID().toString();
+
+            lore.add(uuid);
             m.setLore(lore);
             i.setItemMeta(m);
 
+            BackPackMan.addBackPack(uuid);
             e.getInventory().setResult(i);
         }
     }
