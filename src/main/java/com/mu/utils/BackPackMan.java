@@ -4,14 +4,18 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.mu.item.BackPackParser;
 import com.mu.item.InventoryParser;
+import org.bukkit.Material;
 import org.bukkit.inventory.Inventory;
 
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class BackPackMan {
+
+    public static ArrayList<Material> BLACK_LIST = new ArrayList<>();
 
     public static void addBackPack(String uuid) {
         try {
