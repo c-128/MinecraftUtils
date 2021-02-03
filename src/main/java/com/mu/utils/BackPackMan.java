@@ -19,21 +19,12 @@ public class BackPackMan {
 
     public static void addBackPack(String uuid) {
         try {
-            File f = new File(Stats.WORKSPACE + "backpacks/packs.list");
-            if (!f.exists()) {
-                f.createNewFile();
-            }
-
-            FileWriter wr = new FileWriter(f);
-            wr.append(uuid);
-            wr.close();
-
             String str = BackPackParser.toString(uuid);
             File bf = new File(Stats.WORKSPACE + "backpacks/" + uuid + ".bkp");
             if (!bf.exists()) {
                 bf.createNewFile();
             }
-            wr = new FileWriter(bf);
+            FileWriter wr = new FileWriter(bf);
             wr.write(str);
             wr.close();
         } catch (IOException ex) {
@@ -43,21 +34,12 @@ public class BackPackMan {
 
     public static void saveBackPack(String uuid, Inventory inv) {
         try {
-            File f = new File(Stats.WORKSPACE + "backpacks/packs.list");
-            if (!f.exists()) {
-                f.createNewFile();
-            }
-
-            FileWriter wr = new FileWriter(f);
-            wr.append(uuid);
-            wr.close();
-
             String str = BackPackParser.toString(uuid, inv);
             File bf = new File(Stats.WORKSPACE + "backpacks/" + uuid + ".bkp");
             if (!bf.exists()) {
                 bf.createNewFile();
             }
-            wr = new FileWriter(bf);
+            FileWriter wr = new FileWriter(bf);
             wr.write(str);
             wr.close();
         } catch (IOException ex) {
