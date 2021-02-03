@@ -1,5 +1,5 @@
 name: MinecraftUtils
 version: ${project.version}
-main: com.mu.minecraftutils.MinecraftUtils
+main: com.mu.main.Main
 api-version: 1.16
 authors: [c_64, CrimsonX]
