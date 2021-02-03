@@ -1,9 +1,7 @@
 package com.mu.recepies;
 
-import com.mu.item.Item;
 import com.mu.item.Items;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.inventory.ShapedRecipe;
 

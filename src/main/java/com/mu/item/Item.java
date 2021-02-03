@@ -31,6 +31,7 @@ public class Item {
         ItemMeta me = i.getItemMeta();
         me.addEnchant(en, level, b);
         me.setDisplayName(name);
+
         return i;
     }
 }
