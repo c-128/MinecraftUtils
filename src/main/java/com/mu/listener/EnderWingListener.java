@@ -21,7 +21,7 @@ public class EnderWingListener implements Listener {
         Player p = e.getPlayer();
         if (cooldown.contains(p.getUniqueId().toString())) return;
         if (p.getInventory().getChestplate().equals(Items.ENDER_WINGS)) {
-            p.setVelocity(p.getLocation().toVector().setY(2));
+            p.setVelocity(p.getLocation().getDirection().multiply(1).setY(1));
             cooldown.add(e.getPlayer().getUniqueId().toString());
             new BukkitRunnable() {
                 @Override
