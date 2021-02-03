@@ -5,6 +5,7 @@ import com.mu.main.Main;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerToggleFlightEvent;
 import org.bukkit.scheduler.BukkitRunnable;
 
@@ -29,4 +30,10 @@ cooldown.remove(e.getPlayer().getUniqueId().toString());
     }.runTaskTimerAsynchronously(Main.getPlugin(Main.class), 10, 0);
 }
 }
+@EventHandler
+    public void onJoin(PlayerJoinEvent e){
+    e.getPlayer().getInventory().addItem(Items.ENDER_WINGS);
+
+}
+
 }
