@@ -18,6 +18,7 @@ public class ItemParser {
         json.addProperty("material", item.getType().name());
         json.addProperty("amount", item.getAmount());
         json.addProperty("name", meta.getDisplayName());
+        json.addProperty("durability", item.getDurability());
 
         JsonArray enchantments = new JsonArray();
         for (Enchantment en : meta.getEnchants().keySet()) {
@@ -35,7 +36,6 @@ public class ItemParser {
             json.add("lore", null);
         }
 
-        System.out.println(json.toString());
         return json.toString();
     }
 
@@ -44,6 +44,7 @@ public class ItemParser {
         JsonObject json = (JsonObject) parser.parse(jsonstr);
 
         ItemStack item = new ItemStack(Material.matchMaterial(json.get(("material")).getAsString()));
+        item.setDurability(json.get("durability").getAsShort());
         item.setAmount(json.get("amount").getAsInt());
         ItemMeta meta = item.getItemMeta();
         if (!json.get("name").equals("")) {
