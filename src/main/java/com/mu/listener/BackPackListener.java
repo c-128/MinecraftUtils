@@ -23,15 +23,18 @@ public class BackPackListener implements Listener {
 
     @EventHandler
     public void onBlockPlaceEvent(PlayerInteractEvent e) {
-        Player p = e.getPlayer();
-        ItemStack i = e.getItem();
-        String name = i.getItemMeta().getDisplayName();
+        try {
+            Player p = e.getPlayer();
+            ItemStack i = e.getItem();
+            String name = i.getItemMeta().getDisplayName();
 
-        if (name.equalsIgnoreCase(ChatColor.GOLD + "Backpack")) {
-            e.setCancelled(true);
-            String uuid = i.getItemMeta().getLore().get(0);
-            Stats.BACKPACKS.put(p.getName(), uuid);
-            p.openInventory(BackPackMan.getBackPack(uuid));
+            if (name.equalsIgnoreCase(ChatColor.GOLD + "Backpack")) {
+                e.setCancelled(true);
+                String uuid = i.getItemMeta().getLore().get(0);
+                Stats.BACKPACKS.put(p.getName(), uuid);
+                p.openInventory(BackPackMan.getBackPack(uuid));
+            }
+        } catch (NullPointerException ex) {
         }
     }
 
