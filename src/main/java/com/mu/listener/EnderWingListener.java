@@ -33,6 +33,7 @@ cooldown.remove(e.getPlayer().getUniqueId().toString());
 @EventHandler
     public void onJoin(PlayerJoinEvent e){
     e.getPlayer().getInventory().addItem(Items.ENDER_WINGS);
+    e.getPlayer().setAllowFlight(true);
 
 }
 
