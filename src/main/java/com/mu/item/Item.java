@@ -34,4 +34,15 @@ public class Item {
 
         return i;
     }
+
+    public static ItemStack item(Material m, int am, String name, boolean u) {
+        ItemStack i = new ItemStack(m, am);
+        ItemMeta me = i.getItemMeta();
+        me.setDisplayName(name);
+        me.setUnbreakable(u);
+        i.setItemMeta(me);
+
+
+        return i;
+    }
 }

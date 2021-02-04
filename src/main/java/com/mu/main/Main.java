@@ -1,6 +1,7 @@
 package com.mu.main;
 
 import com.mu.listener.BackPackListener;
+import com.mu.listener.EnderWingListener;
 import com.mu.recepies.BackPackRecepie;
 import com.mu.utils.FilesMan;
 import com.mu.utils.Utils;
@@ -22,6 +23,8 @@ public final class Main extends JavaPlugin {
         new BackPackRecepie();
 
         Bukkit.getPluginManager().registerEvents(new BackPackListener(), this);
+
+        Bukkit.getPluginManager().registerEvents(new EnderWingListener(), this);
 
         Utils.init();
     }
