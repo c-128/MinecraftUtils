@@ -17,7 +17,7 @@ import java.util.Random;
 public final class Main extends JavaPlugin {
 
     public static Random R = new Random(Bukkit.getWorld("world").getSeed());
-    public static String VERSION = "0.2";
+    public static String VERSION = "1.0";
 
     @Override
     public void onEnable() {

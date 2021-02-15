@@ -6,7 +6,7 @@
 
     <groupId>com.mu</groupId>
     <artifactId>MinecraftUtils</artifactId>
-    <version>0.1-NOT_WORKING</version>
+    <version>1.0</version>
     <packaging>jar</packaging>
 
     <name>MinecraftUtils</name>
