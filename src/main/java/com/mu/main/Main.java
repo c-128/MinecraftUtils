@@ -6,6 +6,7 @@ import com.mu.recepies.EnchantedGoldenAppleRecipe;
 import com.mu.recepies.InfiniteFoodItemRecipe;
 import com.mu.utils.Config;
 import com.mu.utils.FilesMan;
+import com.mu.utils.UpdateMan;
 import com.mu.utils.Utils;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -16,10 +17,13 @@ import java.util.Random;
 public final class Main extends JavaPlugin {
 
     public static Random R = new Random(Bukkit.getWorld("world").getSeed());
+    public static String VERSION = "0.2";
 
     @Override
     public void onEnable() {
         try {
+            UpdateMan.update();
+
             FilesMan.setup();
 
             saveDefaultConfig();
@@ -57,6 +61,7 @@ public final class Main extends JavaPlugin {
             new EnchantedGoldenAppleRecipe();
         }
 
+        Bukkit.getPluginManager().registerEvents(new UpdateNotifyListener(), this);
         Bukkit.getPluginManager().registerEvents(new ExtraOreGenListener(), this);
         Bukkit.getPluginManager().registerEvents(new EnderWingListener(), this);
 
