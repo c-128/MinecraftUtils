@@ -8,4 +8,5 @@ public class Items {
 
     public static ItemStack BACK_PACK = Item.item(Material.BARREL, 1, ChatColor.GOLD + "Backpack");
     public static ItemStack ENDER_WINGS = Item.item(Material.ELYTRA, 1, ChatColor.DARK_PURPLE + "Ender Wings", true);
+    public static ItemStack INFINITE_FOOD_ITEM = Item.item(Material.ENCHANTED_GOLDEN_APPLE, 1, ChatColor.GOLD + "Infinite Food");
 }

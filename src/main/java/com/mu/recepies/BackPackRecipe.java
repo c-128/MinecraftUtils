@@ -5,9 +5,9 @@ import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.inventory.ShapedRecipe;
 
-public class BackPackRecepie {
+public class BackPackRecipe {
 
-    public BackPackRecepie() {
+    public BackPackRecipe() {
         ShapedRecipe re = new ShapedRecipe(Items.BACK_PACK);
 
         re.shape("LLL", "LSL", "LLL");
