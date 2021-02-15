@@ -2,6 +2,7 @@ package com.mu.item;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.mu.utils.Config;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.inventory.Inventory;
@@ -15,18 +16,20 @@ public class BackPackParser {
 
     public static String toString(String uuid) {
         JsonObject json = new JsonObject();
+        int size = Config.getConfig().getInt("backpack.size");
 
         json.addProperty("uuid", uuid);
-        json.addProperty("cont", InventoryParser.toString(Bukkit.createInventory(null, 27), ChatColor.GOLD + "Backpack"));
+        json.addProperty("cont", InventoryParser.toString(Bukkit.createInventory(null, size), ChatColor.GOLD + "Backpack"));
 
         return json.toString();
     }
 
     public static String toString(ItemStack i) {
         JsonObject json = new JsonObject();
+        int size = Config.getConfig().getInt("backpack.size");
 
         json.addProperty("uuid", i.getItemMeta().getLore().get(0));
-        json.addProperty("cont", InventoryParser.toString(Bukkit.createInventory(null, 27), ChatColor.GOLD + "Backpack"));
+        json.addProperty("cont", InventoryParser.toString(Bukkit.createInventory(null, size), ChatColor.GOLD + "Backpack"));
 
         return json.toString();
     }
