@@ -1,5 +1,6 @@
 package com.mu.main;
 
+import com.mu.commands.MinecraftUtilsCommand;
 import com.mu.listener.*;
 import com.mu.recepies.BackPackRecipe;
 import com.mu.recepies.EnchantedGoldenAppleRecipe;
@@ -16,7 +17,7 @@ import java.util.Random;
 
 public final class Main extends JavaPlugin {
 
-    public static Random R = new Random(Bukkit.getWorld("world").getSeed());
+    public static Random R = new Random();
     public static String VERSION = "1.0";
 
     @Override
@@ -64,6 +65,8 @@ public final class Main extends JavaPlugin {
         Bukkit.getPluginManager().registerEvents(new UpdateNotifyListener(), this);
         Bukkit.getPluginManager().registerEvents(new ExtraOreGenListener(), this);
         Bukkit.getPluginManager().registerEvents(new EnderWingListener(), this);
+
+        getCommand("mu").setExecutor(new MinecraftUtilsCommand());
 
         Utils.init();
     }
