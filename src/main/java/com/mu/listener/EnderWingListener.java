@@ -35,11 +35,4 @@ public class EnderWingListener implements Listener {
             }
         }
     }
-
-    @EventHandler
-    public void onPlayerJoin(PlayerJoinEvent e) {
-        if(e.getPlayer().isOp()) {
-            e.getPlayer().getInventory().addItem(Items.ENDER_WINGS);
-        }
-    }
 }
