@@ -45,4 +45,17 @@ public class Item {
 
         return i;
     }
+
+    public static ItemStack item(Material m, int am, String name, Enchantment[] ench) {
+        ItemStack i = new ItemStack(m, am);
+        ItemMeta me = i.getItemMeta();
+        me.setDisplayName(name);
+        for (Enchantment e : ench) {
+            me.addEnchant(e, 1, true);
+        }
+        i.setItemMeta(me);
+
+
+        return i;
+    }
 }

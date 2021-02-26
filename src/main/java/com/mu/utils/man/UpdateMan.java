@@ -1,4 +1,4 @@
-package com.mu.utils;
+package com.mu.utils.man;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonParser;

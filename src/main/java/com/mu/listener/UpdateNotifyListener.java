@@ -1,6 +1,6 @@
 package com.mu.listener;
 
-import com.mu.utils.UpdateMan;
+import com.mu.utils.man.UpdateMan;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;

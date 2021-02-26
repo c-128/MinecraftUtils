@@ -1,9 +1,10 @@
-package com.mu.utils;
+package com.mu.utils.man;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.mu.item.BackPackParser;
 import com.mu.item.InventoryParser;
+import com.mu.utils.Stats;
 import org.bukkit.Material;
 import org.bukkit.inventory.Inventory;
 

@@ -52,7 +52,7 @@ public class SpawnerListener implements Listener {
                 ItemMeta meta = todorp.getItemMeta();
 
                 List<String> lore = new ArrayList<>();
-                lore.add(ChatColor.GRAY + cs.getSpawnedType().name());
+                lore.add(cs.getSpawnedType().name());
                 meta.setLore(lore);
                 todorp.setItemMeta(meta);
 
