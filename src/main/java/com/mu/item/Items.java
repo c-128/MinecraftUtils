@@ -17,6 +17,6 @@ public class Items {
     public static void init() {
         Enchantment[] ENCH_INVIS = {GlowEnchantment.getGlow()};
         QUARRY = Item.item(Material.FURNACE, 1, ChatColor.GOLD + "Quarry", ENCH_INVIS);
-        POWER_CABLE = Item.item(Material.IRON_BLOCK, 1, ChatColor.GOLD + "Power Cable", ENCH_INVIS);
+        POWER_CABLE = Item.item(Material.REDSTONE_LAMP, 1, ChatColor.GOLD + "Power Cable", ENCH_INVIS);
     }
 }

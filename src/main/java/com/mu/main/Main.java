@@ -5,14 +5,11 @@ import com.mu.commands.MinecraftUtilsCommand;
 import com.mu.enchants.GlowEnchantment;
 import com.mu.item.Items;
 import com.mu.listener.*;
-import com.mu.recepies.BackPackRecipe;
-import com.mu.recepies.EnchantedGoldenAppleRecipe;
-import com.mu.recepies.InfiniteFoodItemRecipe;
-import com.mu.recepies.QuarryRecipe;
+import com.mu.recepies.*;
 import com.mu.utils.Config;
 import com.mu.utils.man.FilesMan;
+import com.mu.utils.man.PowerNodesMan;
 import com.mu.utils.man.QuarryMan;
-import com.mu.utils.man.UpdateMan;
 import com.mu.utils.Utils;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -23,14 +20,13 @@ import java.util.Random;
 public final class Main extends JavaPlugin {
 
     public static Random R = new Random();
+    public static PowerNodesMan pman = new PowerNodesMan();
 
     @Override
     public void onEnable() {
         try {
             GlowEnchantment.registerGlow();
             Items.init();
-
-            UpdateMan.update();
 
             FilesMan.setup();
 
@@ -51,6 +47,8 @@ public final class Main extends JavaPlugin {
             Config.getConfig().addDefault("quarry.enabled", true);
             Config.getConfig().addDefault("quarry.blacklist", new String[]{"BEDROCK"});
             Config.getConfig().addDefault("quarry.speed", 1000);
+
+            Config.getConfig().addDefault("power.enabled", true);
 
             Config.getConfig().options().copyDefaults(true);
             Config.save();
@@ -73,6 +71,10 @@ public final class Main extends JavaPlugin {
                 Bukkit.getPluginManager().registerEvents(new QuarryListener(), this);
                 QuarryMan.init();
                 new QuarryRecipe();
+            }
+            if (Config.getConfig().getBoolean("power.enabled")) {
+                Bukkit.getPluginManager().registerEvents(new PowerNodeListener(), this);
+                new PowerNodeRecipe();
             }
 
             Bukkit.getPluginManager().registerEvents(new ExtraOreGenListener(), this);
@@ -97,4 +99,7 @@ public final class Main extends JavaPlugin {
         }
     }
 
+    public static PowerNodesMan getPowerMan() {
+        return pman;
+    }
 }
