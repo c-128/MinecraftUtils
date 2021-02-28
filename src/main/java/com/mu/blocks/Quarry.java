@@ -78,7 +78,6 @@ public class Quarry {
                     Location droploc = new Location(storage.getLocation().getWorld(), storage.getX() + 0.5, getLocation().getBlockY() + 2, storage.getZ() + 0.5);
 
                     for (ItemStack i : cblock.getDrops()) {
-                        breakBlock();
                         storage.getLocation().getWorld().dropItem(droploc, i);
                     }
                 }

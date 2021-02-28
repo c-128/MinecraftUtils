@@ -5,6 +5,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.mu.blocks.Quarry;
 import com.mu.utils.Config;
+import com.mu.utils.Stats;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
@@ -18,7 +19,7 @@ import java.util.concurrent.TimeUnit;
 
 public class QuarryMan {
 
-    private static File f = new File("./ctplugin/quarry/quarries.ls");
+    private static File f = new File(Stats.WORKSPACE + "/quarry/quarries.ls");
     private static ArrayList<Quarry> QUARRIES = new ArrayList<>();
     private static Thread t;
 
@@ -76,7 +77,7 @@ public class QuarryMan {
                         }
                     }
 
-                    TimeUnit.MILLISECONDS.sleep(Config.getConfig().getInt("quarry.speed"));
+                    TimeUnit.SECONDS.sleep(Config.getConfig().getInt("quarry.speed"));
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }

@@ -6,7 +6,6 @@ import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerToggleFlightEvent;
 import org.bukkit.scheduler.BukkitRunnable;
 
@@ -14,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class EnderWingListener implements Listener {
-    List<String> cooldown = new ArrayList<String>();
+    List<String> cooldown = new ArrayList<>();
 
     @EventHandler
     public void onFly(PlayerToggleFlightEvent e) {
