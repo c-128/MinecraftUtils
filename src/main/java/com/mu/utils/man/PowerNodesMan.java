@@ -1,5 +1,6 @@
 package com.mu.utils.man;
 
+import com.mu.blocks.PowerNetwork;
 import com.mu.blocks.PowerNode;
 import org.bukkit.Location;
 
@@ -37,5 +38,17 @@ public class PowerNodesMan {
             }
         }
         return null;
+    }
+
+    public ArrayList<PowerNetwork> getNetworks() {
+        ArrayList<PowerNetwork> networks = new ArrayList<>();
+
+        for (PowerNode node : this.nodes) {
+            if (!networks.contains(node.getNetwork())) {
+                networks.add(node.getNetwork());
+            }
+        }
+
+        return networks;
     }
 }

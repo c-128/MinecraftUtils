@@ -8,6 +8,7 @@ import com.mu.listener.*;
 import com.mu.recepies.*;
 import com.mu.utils.Config;
 import com.mu.utils.man.FilesMan;
+import com.mu.utils.man.PowerMan;
 import com.mu.utils.man.PowerNodesMan;
 import com.mu.utils.man.QuarryMan;
 import com.mu.utils.Utils;
@@ -74,6 +75,7 @@ public final class Main extends JavaPlugin {
             }
             if (Config.getConfig().getBoolean("power.enabled")) {
                 Bukkit.getPluginManager().registerEvents(new PowerNodeListener(), this);
+                PowerMan.init();
                 new PowerNodeRecipe();
             }
 
@@ -93,6 +95,9 @@ public final class Main extends JavaPlugin {
         try {
             if (Config.getConfig().getBoolean("quarry.enabled")) {
                 QuarryMan.save();
+            }
+            if (Config.getConfig().getBoolean("power.enabled")) {
+                PowerMan.save();
             }
         } catch (IOException e) {
             e.printStackTrace();

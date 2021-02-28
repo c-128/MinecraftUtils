@@ -1,5 +1,6 @@
 package com.mu.blocks;
 
+import com.google.gson.JsonObject;
 import com.mu.main.Main;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -55,5 +56,15 @@ public class PowerNode {
             nodes.add(Main.getPowerMan().getByLocation(this.b.getRelative(BlockFace.DOWN).getLocation()));
         }
         return nodes;
+    }
+
+    public JsonObject toJson() {
+        JsonObject json = new JsonObject();
+        json.addProperty("x", this.b.getLocation().getBlockX());
+        json.addProperty("y", this.b.getLocation().getBlockY());
+        json.addProperty("z", this.b.getLocation().getBlockZ());
+        json.addProperty("world", this.b.getWorld().getName());
+
+        return json;
     }
 }

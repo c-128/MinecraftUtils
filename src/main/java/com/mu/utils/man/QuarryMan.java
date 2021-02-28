@@ -24,6 +24,7 @@ public class QuarryMan {
     private static Thread t;
 
     public static void init() throws IOException {
+        new File(Stats.WORKSPACE + "/quarry/").mkdirs();
         if (!f.exists()) {
             f.createNewFile();
 

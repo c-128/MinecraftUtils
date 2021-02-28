@@ -13,10 +13,12 @@ public class Items {
     public static ItemStack INFINITE_FOOD_ITEM = Item.item(Material.ENCHANTED_GOLDEN_APPLE, 1, ChatColor.GOLD + "Infinite Food");
     public static ItemStack QUARRY = null;
     public static ItemStack POWER_CABLE = null;
+    public static ItemStack POWER_GENERATOR = null;
 
     public static void init() {
         Enchantment[] ENCH_INVIS = {GlowEnchantment.getGlow()};
         QUARRY = Item.item(Material.FURNACE, 1, ChatColor.GOLD + "Quarry", ENCH_INVIS);
         POWER_CABLE = Item.item(Material.REDSTONE_LAMP, 1, ChatColor.GOLD + "Power Cable", ENCH_INVIS);
+        POWER_GENERATOR = Item.item(Material.FURNACE, 1, ChatColor.GOLD + "Power Generator", ENCH_INVIS);
     }
 }
