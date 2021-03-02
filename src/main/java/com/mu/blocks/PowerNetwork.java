@@ -2,6 +2,10 @@ package com.mu.blocks;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import com.mu.item.Items;
+import com.mu.main.Main;
+import org.bukkit.Bukkit;
+import org.bukkit.Material;
 
 import java.util.ArrayList;
 import java.util.UUID;
@@ -92,6 +96,10 @@ public class PowerNetwork {
     }
 
     public void addConsumtion(long amount) {
+        this.powerconsumtion = this.powerconsumtion + amount;
+    }
+
+    public void removeConsumtion(long amount) {
         this.powerconsumtion = this.powerconsumtion - amount;
     }
 
@@ -101,6 +109,17 @@ public class PowerNetwork {
 
     public void caculatePower() {
         this.powerlevel = this.powergeneratoin - this.powerconsumtion;
+
+        if (this.powerlevel < 0) {
+            for (PowerNode node : this.nodes) {
+                Bukkit.getServer().getScheduler().runTask(Main.getPlugin(Main.class), () -> {
+                    System.out.println(node);
+                    node.getBlock().setType(Material.AIR);
+                    node.getBlock().getLocation().getWorld().dropItem(node.getBlock().getLocation(), Items.POWER_CABLE);
+                    this.removeNode(node);
+                });
+            }
+        }
     }
 
     public JsonObject toJson() {

@@ -1,5 +1,7 @@
 package com.mu.listener;
 
+import com.mu.blocks.PowerGenerator;
+import com.mu.blocks.PowerNode;
 import com.mu.blocks.Quarry;
 import com.mu.item.Item;
 import com.mu.item.Items;
@@ -20,6 +22,7 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
+import java.util.ArrayList;
 import java.util.ConcurrentModificationException;
 
 public class QuarryListener implements Listener {
@@ -128,8 +131,26 @@ public class QuarryListener implements Listener {
         ItemStack i = e.getItemInHand();
         Block b = e.getBlock();
         Location l = b.getLocation();
+        Player p = e.getPlayer();
 
         if (i.isSimilar(Items.QUARRY)) {
+            PowerNode node = new PowerNode();
+            node.setBlock(b);
+
+            ArrayList<PowerNode> attached = node.attachesToOtherNode();
+            if (attached.size() == 0) {
+                e.setCancelled(true);
+                p.sendMessage(ChatColor.RED + "Error! The quarry must be placed against one power node!");
+                return;
+            } else if (attached.size() == 1) {
+                node.setNetwork(attached.get(0).getNetwork());
+                node.getNetwork().addConsumtion(500);
+            } else {
+                e.setCancelled(true);
+                p.sendMessage(ChatColor.RED + "Error! The quarry must be placed against one power node!");
+                return;
+            }
+
             Quarry q = new Quarry();
             q.setRadius(10);
             q.setLocation(b.getLocation());
@@ -146,11 +167,30 @@ public class QuarryListener implements Listener {
         try {
             Block b = e.getBlock();
             Location l = e.getBlock().getLocation();
+            Player p = e.getPlayer();
 
             for (Quarry q : QuarryMan.getQuarries()) {
                 if (l.getBlockX() == q.getLocation().getBlockX()) {
                     if (l.getBlockY() == q.getLocation().getBlockY()) {
                         if (l.getBlockZ() == q.getLocation().getBlockZ()) {
+
+                            PowerNode node = new PowerNode();
+                            node.setBlock(b);
+
+                            ArrayList<PowerNode> attached = node.attachesToOtherNode();
+                            if (attached.size() == 0) {
+                                e.setCancelled(true);
+                                p.sendMessage(ChatColor.RED + "Error! The quarry must be placed against one power node!");
+                                return;
+                            } else if (attached.size() == 1) {
+                                node.setNetwork(attached.get(0).getNetwork());
+                                node.getNetwork().removeConsumtion(500);
+                            } else {
+                                e.setCancelled(true);
+                                p.sendMessage(ChatColor.RED + "Error! The quarry must be placed against one power node!");
+                                return;
+                            }
+
                             QuarryMan.removeQuarry(q);
                             e.setCancelled(true);
                             b.setType(Material.AIR);
