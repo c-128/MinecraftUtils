@@ -2,7 +2,6 @@ package com.mu.blocks;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-import org.bukkit.Material;
 
 import java.util.ArrayList;
 import java.util.UUID;
@@ -11,6 +10,8 @@ public class PowerNetwork {
 
     private ArrayList<PowerNode> nodes = new ArrayList<>();
     private long powerlevel = 0;
+    private long powergeneratoin = 0;
+    private long powerconsumtion = 0;
     private String uuid;
 
     public PowerNetwork() {
@@ -64,6 +65,7 @@ public class PowerNetwork {
     public PowerNetwork merchNetworks(PowerNetwork... net) {
         PowerNetwork done = new PowerNetwork();
         for (PowerNetwork n : net) {
+            done.addGenerator(n.getPowerGeneration());
             for (PowerNode node : n.getNodes()) {
                 node.setNetwork(done);
                 done.addNode(node);
@@ -71,6 +73,34 @@ public class PowerNetwork {
         }
 
         return done;
+    }
+
+    public long getPowerGeneration() {
+        return this.powergeneratoin;
+    }
+
+    public void addGenerator(long amount) {
+        this.powergeneratoin = this.powergeneratoin + amount;
+    }
+
+    public void removeGenerator(long amount) {
+        this.powergeneratoin = this.powergeneratoin - amount;
+    }
+
+    public void setPowerGeneratoin(long powergeneratoin) {
+        this.powergeneratoin = powergeneratoin;
+    }
+
+    public void addConsumtion(long amount) {
+        this.powerconsumtion = this.powerconsumtion - amount;
+    }
+
+    public void setPowerConsumtion(long powerconsumtion) {
+        this.powerconsumtion = powerconsumtion;
+    }
+
+    public void caculatePower() {
+        this.powerlevel = this.powergeneratoin - this.powerconsumtion;
     }
 
     public JsonObject toJson() {
@@ -83,6 +113,8 @@ public class PowerNetwork {
         json.add("nodes", nodes);
         json.addProperty("powerlevel", this.powerlevel);
         json.addProperty("uuid", this.uuid);
+        json.addProperty("gen", this.powergeneratoin);
+        json.addProperty("cons", this.powerconsumtion);
 
         return json;
     }

@@ -41,6 +41,8 @@ public class PowerMan {
             JsonObject json = new JsonParser().parse(data).getAsJsonObject();
             network.setPowerLevel(json.get("powerlevel").getAsLong());
             network.setUUID(json.get("uuid").getAsString());
+            network.setPowerGeneratoin(json.get("gen").getAsLong());
+            network.setPowerConsumtion(json.get("cons").getAsLong());
 
             JsonArray nodes = json.get("nodes").getAsJsonArray();
             for (int i = 0; i < nodes.size(); i++) {
@@ -58,6 +60,9 @@ public class PowerMan {
         t = new Thread(() -> {
             while (true) {
                 try {
+                    for (PowerNetwork network : Main.getPowerMan().getNetworks()) {
+                        network.caculatePower();
+                    }
                     TimeUnit.SECONDS.sleep(1);
                 } catch (InterruptedException e) {
                     e.printStackTrace();

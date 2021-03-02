@@ -1,4 +1,4 @@
-package com.mu.listener;
+package com.mu.listener.power;
 
 import com.mu.blocks.PowerNetwork;
 import com.mu.blocks.PowerNode;
@@ -52,8 +52,6 @@ public class PowerNodeListener implements Listener {
             System.out.println("All nodes: " + Main.getPowerMan().getNodes().toString());
             System.out.println("Network: " + node.getNetwork().toString());
             System.out.println("--------------------------------------------------------------");
-
-            node.getNetwork().setPowerLevel(node.getNetwork().getNodes().size() * 100);
         }
     }
 
