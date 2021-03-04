@@ -4,17 +4,13 @@ import com.mu.commands.MinecraftUtilsCommand;
 import com.mu.enchants.GlowEnchantment;
 import com.mu.item.Items;
 import com.mu.listener.*;
-import com.mu.listener.power.PowerGeneratorListener;
-import com.mu.listener.power.PowerNodeListener;
 import com.mu.recepies.*;
 import com.mu.utils.Config;
 import com.mu.utils.man.FilesMan;
-import com.mu.utils.man.PowerMan;
 import com.mu.utils.man.PowerNodesMan;
 import com.mu.utils.man.QuarryMan;
 import com.mu.utils.Utils;
 import org.bukkit.Bukkit;
-import org.bukkit.event.inventory.PrepareAnvilEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.IOException;
@@ -53,6 +49,12 @@ public final class Main extends JavaPlugin {
 
             Config.getConfig().addDefault("power.enabled", true);
 
+            Config.getConfig().addDefault("enchanting.mending", true);
+            Config.getConfig().addDefault("enchanting.max", true);
+
+            Config.getConfig().addDefault("villager.instant-curing", true);
+            Config.getConfig().addDefault("villager.time", 0);
+
             Config.getConfig().options().copyDefaults(true);
             Config.save();
 
@@ -74,6 +76,15 @@ public final class Main extends JavaPlugin {
                 Bukkit.getPluginManager().registerEvents(new QuarryListener(), this);
                 QuarryMan.init();
                 new QuarryRecipe();
+            }
+            if (Config.getConfig().getBoolean("enchanting.mending")) {
+                Bukkit.getPluginManager().registerEvents(new MendingEnchantmentListener(), this);
+            }
+            if (Config.getConfig().getBoolean("enchanting.max")) {
+                Bukkit.getPluginManager().registerEvents(new MaxEnchantingListener(), this);
+            }
+            if (Config.getConfig().getBoolean("villager.instant-curing")) {
+                Bukkit.getPluginManager().registerEvents(new VillagerZombifyListener(), this);
             }
             /*if (Config.getConfig().getBoolean("power.enabled")) {
                 Bukkit.getPluginManager().registerEvents(new PowerNodeListener(), this);
