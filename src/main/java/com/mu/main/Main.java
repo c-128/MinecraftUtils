@@ -75,13 +75,13 @@ public final class Main extends JavaPlugin {
                 QuarryMan.init();
                 new QuarryRecipe();
             }
-            if (Config.getConfig().getBoolean("power.enabled")) {
+            /*if (Config.getConfig().getBoolean("power.enabled")) {
                 Bukkit.getPluginManager().registerEvents(new PowerNodeListener(), this);
                 Bukkit.getPluginManager().registerEvents(new PowerGeneratorListener(), this);
                 PowerMan.init();
                 new PowerNodeRecipe();
                 new PowerGeneratorRecipe();
-            }
+            }*/
 
             Bukkit.getPluginManager().registerEvents(new ExtraOreGenListener(), this);
             Bukkit.getPluginManager().registerEvents(new EnderWingListener(), this);
@@ -100,9 +100,9 @@ public final class Main extends JavaPlugin {
             if (Config.getConfig().getBoolean("quarry.enabled")) {
                 QuarryMan.save();
             }
-            if (Config.getConfig().getBoolean("power.enabled")) {
+            /*if (Config.getConfig().getBoolean("power.enabled")) {
                 PowerMan.save();
-            }
+            }*/
         } catch (IOException e) {
             e.printStackTrace();
         }
