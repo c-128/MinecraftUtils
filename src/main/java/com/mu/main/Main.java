@@ -5,11 +5,10 @@ import com.mu.enchants.GlowEnchantment;
 import com.mu.item.Items;
 import com.mu.listener.*;
 import com.mu.recepies.*;
-import com.mu.utils.Config;
-import com.mu.utils.man.FilesMan;
 import com.mu.utils.man.PowerNodesMan;
 import com.mu.utils.man.QuarryMan;
 import com.mu.utils.Utils;
+import com.mu.utils.man.RecipeMan;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -19,7 +18,8 @@ import java.util.Random;
 public final class Main extends JavaPlugin {
 
     public static Random R = new Random();
-    public static PowerNodesMan pman = new PowerNodesMan();
+    private static PowerNodesMan pman = new PowerNodesMan();
+    private static RecipeMan recipeMan = new RecipeMan();
 
     @Override
     public void onEnable() {
@@ -50,6 +50,7 @@ public final class Main extends JavaPlugin {
             Config.getConfig().addDefault("power.enabled", true);
 
             Config.getConfig().addDefault("enchanting.mending", true);
+            //Config.getConfig().addDefault("enchanting.craftable-books", true);
             Config.getConfig().addDefault("enchanting.max", true);
 
             Config.getConfig().addDefault("villager.instant-curing", true);
@@ -77,25 +78,30 @@ public final class Main extends JavaPlugin {
                 QuarryMan.init();
                 new QuarryRecipe();
             }
-            if (Config.getConfig().getBoolean("enchanting.mending")) {
-                Bukkit.getPluginManager().registerEvents(new MendingEnchantmentListener(), this);
-            }
-            if (Config.getConfig().getBoolean("enchanting.max")) {
-                Bukkit.getPluginManager().registerEvents(new MaxEnchantingListener(), this);
-            }
-            if (Config.getConfig().getBoolean("villager.instant-curing")) {
-                Bukkit.getPluginManager().registerEvents(new VillagerZombifyListener(), this);
-            }
-            /*if (Config.getConfig().getBoolean("power.enabled")) {
+            /*Config.getConfig().getBoolean("power.enabled")) {
                 Bukkit.getPluginManager().registerEvents(new PowerNodeListener(), this);
                 Bukkit.getPluginManager().registerEvents(new PowerGeneratorListener(), this);
                 PowerMan.init();
                 new PowerNodeRecipe();
                 new PowerGeneratorRecipe();
             }*/
+            if (Config.getConfig().getBoolean("enchanting.mending")) {
+                Bukkit.getPluginManager().registerEvents(new MendingEnchantmentListener(), this);
+            }
+            /*if (Config.getConfig().getBoolean("enchanting.craftable-books")) {
+                new MendingBookRecipe();
+            }*/
+            if (Config.getConfig().getBoolean("enchanting.max")) {
+                Bukkit.getPluginManager().registerEvents(new MaxEnchantingListener(), this);
+            }
+            if (Config.getConfig().getBoolean("villager.instant-curing")) {
+                Bukkit.getPluginManager().registerEvents(new VillagerZombifyListener(), this);
+            }
+
 
             Bukkit.getPluginManager().registerEvents(new ExtraOreGenListener(), this);
             Bukkit.getPluginManager().registerEvents(new EnderWingListener(), this);
+            //Bukkit.getPluginManager().registerEvents(new CraftingListener(), this);
 
             getCommand("mu").setExecutor(new MinecraftUtilsCommand());
 
@@ -121,5 +127,9 @@ public final class Main extends JavaPlugin {
 
     public static PowerNodesMan getPowerMan() {
         return pman;
+    }
+
+    public static RecipeMan getRecipeMan() {
+        return recipeMan;
     }
 }
